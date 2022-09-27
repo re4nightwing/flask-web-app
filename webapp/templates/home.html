@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Welcome | LlamaLoops{% endblock %}
+{% block content %}
+<div class="showcase w-100 vh-100">
+  <img src="{{ url_for('static', filename='img/NnMH7LDpZTPZS.gif') }}" class="h-100 w-100" alt="LlamaLoops gif">
+  <div id="showcase-img">
+    <img class="p-4" src="{{ url_for('static', filename='img/showcase-logo.png') }}" alt="">
+  </div>
+  <div id="crt-lines"></div>
+  <div class="scroll-down text-center text-light">
+    <p class="h4 m-0">Scroll Down</p>
+    <img src="{{ url_for('static', filename='img/scroll-down.svg') }}" alt="Scroll Down">
+  </div>
+</div>
+<div class="music-platforms text-main text-center py-5">
+  <div class="row mx-1 justify-content-around">
+    <div class="col-auto my-4">
+      <h3><b>Newsletter</b></h3>
+      <div class="row justify-content-center mt-4">
+        <div class="col-auto text-normal">
+          <form action="" method="post">
+            <input type="email" placeholder="Enter your email address" name="newsletter_email" class="py-3 px-4 my-2 text-center border">
+            <button class="px-4 py-3 rounded my-2 subscribe-btn" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto my-4">
+      <h3><b>Listen to Your Favourites</b></h3>
+      <div class="row justify-content-center mt-4">
+        <div class="col-auto">
+          <a href="#"><img src="{{ url_for('static', filename='img/spotify.png') }}"  alt=""></a>
+        </div>
+        <div class="col-auto">
+          <a href="#"><img src="{{ url_for('static', filename='img/apple.png') }}"  alt=""></a>
+        </div>
+        <div class="col-auto">
+          <a href="#"><img src="{{ url_for('static', filename='img/youtube.png') }}"  alt=""></a>
+        </div>
+        <div class="col-auto">
+          <a href="#"><img src="{{ url_for('static', filename='img/amazon.png') }}"  alt=""></a>
+        </div>
+        <div class="col-auto">
+          <a href="#"><img src="{{ url_for('static', filename='img/deezer.png') }}"  alt=""></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div class="releases py-5">
+  <div class="container text-center text-light">
+    <h3 class="text-main mt-3"><b>Latest Releases</b></h3>
+    <div class="row justify-content-center mt-4">
+      {% for release in context.latest_releases %}
+      <div class="col-auto my-2">
+        <a href="#">
+          <div class="square-img">
+            <img src="{{ url_for('static', filename='uploads/'+release.cover_img) }}" class="shadow-sm" alt="title">
+          </div>
+          <div class="text-start">
+            <p class="my-1 h5">{{release.title}}</p>
+            <span><i>{{release.artist}}</i></span>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="mt-5">
+      <a href="#" class="outline-lg-btn">Show More</a>
+    </div>
+    
+  </div>
+</div>
+<h1>Hello, world!</h1>
+<form action="" method="POST" enctype="multipart/form-data">
+  {{context.form.hidden_tag()}}
+  <label for="">Title</label>
+  {{context.form.title()}}
+  <label for="">Artist</label>
+  {{context.form.artist()}}
+  <label for="">Cover Image</label>
+  {{context.form.file()}}
+  <label for="">Description</label>
+  {{context.form.description()}}
+  <br>
+  {{context.form.submit()}}
+</form>
+{% endblock %}
